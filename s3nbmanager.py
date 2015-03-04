@@ -3,10 +3,13 @@ import datetime
 from tornado import web
 
 import boto
+from boto.s3.connection import OrdinaryCallingFormat
 
 from IPython.html.services.notebooks.nbmanager import NotebookManager
 from IPython.nbformat import current
 from IPython.utils.traitlets import Unicode
+
+i'm going to break this
 
 class S3NotebookManager(NotebookManager):
 
@@ -21,8 +24,8 @@ class S3NotebookManager(NotebookManager):
         # boto will fail if empty strings are passed therefore convert to None
         access_key = self.aws_access_key_id if self.aws_access_key_id else None
         secret_key = self.aws_secret_access_key if self.aws_secret_access_key else None
-        self.s3_con = boto.connect_s3(access_key, secret_key)
-        self.bucket = self.s3_con.get_bucket(self.s3_bucket)
+        self.s3_con = boto.connect_s3(access_key, secret_key, calling_format=OrdinaryCallingFormat())
+        self.bucket = self.s3_con.get_bucket(self.s3_bucket, validate=False)
     
     def load_notebook_names(self):
         self.mapping = {}
