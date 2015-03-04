@@ -9,8 +9,6 @@ from IPython.html.services.notebooks.nbmanager import NotebookManager
 from IPython.nbformat import current
 from IPython.utils.traitlets import Unicode
 
-i'm going to break this
-
 class S3NotebookManager(NotebookManager):
 
     aws_access_key_id = Unicode(config=True, help='AWS access key id.')
