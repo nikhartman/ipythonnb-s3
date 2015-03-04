@@ -22,7 +22,7 @@ class S3NotebookManager(NotebookManager):
         # boto will fail if empty strings are passed therefore convert to None
         access_key = self.aws_access_key_id if self.aws_access_key_id else None
         secret_key = self.aws_secret_access_key if self.aws_secret_access_key else None
-        self.s3_con = boto.connect_s3(access_key, secret_key, calling_format=OrdinaryCallingFormat())
+        self.s3_con = boto.connect_s3(calling_format=OrdinaryCallingFormat(), access_key, secret_key)
         self.bucket = self.s3_con.get_bucket(self.s3_bucket)
     
     def load_notebook_names(self):
